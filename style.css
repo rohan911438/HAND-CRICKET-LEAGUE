@@ -1,0 +1,299 @@
+/* Number pad styling */
+.number-pad {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 18px 0 10px 0;
+    gap: 10px;
+}
+
+/* Responsive and optimal button size for number pad */
+.number-pad button {
+    min-width: 60px;
+    min-height: 60px;
+    max-width: 80px;
+    max-height: 80px;
+    font-size: 2em;
+    padding: 0;
+    margin: 0 8px;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px #0004, 0 0 0 2px #ffe06655;
+    background: linear-gradient(135deg, #fff700 60%, #ffe066 100%);
+    color: #0b6623;
+    font-family: "Anton", "Titillium Web", sans-serif;
+    font-weight: bold;
+    transition: 0.15s;
+}
+.number-pad button:hover, .number-pad button:focus {
+    background: linear-gradient(135deg, #ffe066 60%, #fff700 100%);
+    color: #0b6623;
+    transform: scale(1.12);
+    box-shadow: 0 6px 18px #ffe06699, 0 0 0 4px #fff70099;
+}
+
+/* Ensure scores are always visible and prominent on both sides */
+.side-score {
+    font-family: "Anton", sans-serif;
+    font-size: 2.2em;
+    color: #fff700;
+    margin-bottom: 10px;
+    margin-top: 18px;
+    word-break: break-word;
+    text-shadow: 0 2px 8px #000, 0 0 6px #ffe066;
+    letter-spacing: 1px;
+    text-align: center;
+}
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
+
+body {
+    color: #fff;
+    margin: 0;
+    overflow: hidden;
+    background-image: url(cricket.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: 'Titillium Web', 'Segoe UI', Arial, sans-serif;
+    min-height: 100vh;
+    background-blend-mode: lighten;
+}
+
+/* ------------------- Welcome Screen ------------------- */
+
+#welcomeScreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.8); /* dark overlay */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#welcomeScreen h1, #welcomeScreen h2, #welcomeScreen h3 {
+    font-family: "Anton", sans-serif;
+    margin: 10px;
+}
+
+#welcomeScreen h2 {
+    font-size: 40px;
+    color: yellow;
+}
+
+#welcomeScreen button {
+    margin: 10px;
+    padding: 10px 30px;
+    font-size: 22px;
+    background-color: yellow;
+    border: 3px solid black;
+    border-radius: 12px;
+    font-family: "Titillium Web", sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#welcomeScreen button:hover {
+    background-color: white;
+    color: black;
+    transform: scale(1.05);
+}
+
+/* ------------------- Game Heading ------------------- */
+.heading {
+    font-family: "Anton", sans-serif;
+    font-size: 4vw;
+    margin: 10px 0 30px 0;
+    letter-spacing: 2px;
+    text-shadow: 0 4px 16px #000, 0 0 10px #ffe066;
+    background: linear-gradient(90deg, #ffe066 30%, #fff700 70%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* .digital {
+    color: white;
+}
+
+.cricket {
+    color: yellow;
+} */
+.digital {
+    color: #fff;
+    text-shadow: 0 2px 8px #000, 0 0 6px #ffe066;
+}
+.cricket {
+    color: #ffe066;
+    text-shadow: 0 2px 8px #000, 0 0 6px #fff700;
+}
+
+/* ------------------- Game Screen ------------------- */
+
+#gameScreen {
+    width: 100vw;
+    height: 100vh;
+    background: none;
+}
+
+.main-flex {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    min-height: 80vh;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.side {
+    width: 30vw;
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(11, 102, 35, 0.85);
+    border-radius: 30px;
+    margin: 20px;
+    padding: 30px 10px 40px 10px;
+    box-shadow: 0 0 30px #000a, 0 0 0 6px #ffe06644;
+    min-height: 70vh;
+    border: 3px solid #ffe066;
+}
+
+.player-side {
+    order: 1;
+}
+.computer-side {
+    order: 3;
+}
+.center-info {
+    width: 20vw;
+    min-width: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    margin-top: 80px;
+    order: 2;
+    font-family: 'Anton', 'Titillium Web', sans-serif;
+    font-size: 1.5em;
+    text-shadow: 0 2px 8px #000, 0 0 6px #ffe066;
+}
+
+/* ------------------- Player Section ------------------- */
+.player {
+    width: 35%;
+    text-align: center;
+}
+
+#score, #sysScore {
+    font-family: "Anton", sans-serif;
+    font-size: 2.5em;
+    color: #fff700;
+    margin-bottom: 10px;
+    margin-top: 30px;
+    word-break: break-word;
+    text-shadow: 0 2px 8px #000, 0 0 6px #ffe066;
+    letter-spacing: 1px;
+}
+
+
+.hand-img {
+    border-radius: 50%;
+    border: 7px solid #ffe066;
+    margin: 18px 0 18px 0;
+    background: #222;
+    box-shadow: 0 0 30px #ffe06699, 0 0 10px #000a;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.user-hand {
+    transform: rotate(20deg) scaleX(-1); /* face right, mirrored */
+}
+.comp-hand {
+    transform: rotate(-20deg); /* face left */
+}
+
+/* Hand shake animation */
+.hand-shake {
+    animation: shake 0.4s 2;
+}
+@keyframes shake {
+    0% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-10px) rotate(-10deg); }
+    50% { transform: translateY(0) rotate(0deg); }
+    75% { transform: translateY(10px) rotate(10deg); }
+    100% { transform: translateY(0) rotate(0deg); }
+}
+
+/* ------------------- Buttons ------------------- */
+button {
+    font-size: 2.1em;
+    border: none;
+    background: linear-gradient(90deg, #ffe066 60%, #fff700 100%);
+    color: #0b6623;
+    font-weight: bold;
+    border-radius: 16px;
+    margin: 12px 18px;
+    font-family: "Anton", "Titillium Web", sans-serif;
+    cursor: pointer;
+    box-shadow: 0 4px 16px #000a, 0 0 0 3px #ffe06655;
+    padding: 16px 36px;
+    letter-spacing: 1px;
+    transition: 0.2s;
+    outline: none;
+}
+button:hover, button:focus {
+    background: linear-gradient(90deg, #fff700 60%, #ffe066 100%);
+    color: #0b6623;
+    transform: scale(1.08);
+    box-shadow: 0 8px 32px #ffe06699, 0 0 0 4px #fff70099;
+}
+
+/* ------------------- Center Info Section ------------------- */
+.cntSpc {
+    width: 30%;
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    color: white;
+    margin-top: 150px;
+}
+
+#userChoice,
+#sysChoice,
+#status1,
+#status2,
+#status3 {
+    margin: 15px 0;
+}
+
+/* ------------------- Computer Section ------------------- */
+.computer {
+    width: 35%;
+    text-align: center;
+    color: white;
+    font-family: "Anton", sans-serif;
+    font-size: 150%;
+}
+
+#sysScore {
+    margin-top: 40px;
+}
+
+#compScore {
+    margin-bottom: -20px;
+}
+#userHandScore,
+#compHandScore {
+    font-size:2em;
+    color:#fff700;
+    font-family: 'Anton', 'Titillium Web', sans-serif;
+    text-shadow: 0 2px 8px #000, 0 0 6px #ffe066;
+    margin-bottom: 10px;
+}

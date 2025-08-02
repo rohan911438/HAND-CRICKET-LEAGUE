@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ultimate Hand League</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Welcome Screen -->
+  <div id="welcomeScreen">
+    <center>
+      <h1 class="heading">
+        <span class="digital">HAND CRICKET</span>
+        <span class="cricket"> LEAGUE</span>
+      </h1>
+      <h2>Welcome to Hand Cricket!</h2>
+      <p>Choose your toss call:</p>
+      <button onclick="toss('Heads')">Heads</button>
+      <button onclick="toss('Tails')">Tails</button>
+      <h3 id="tossResult"></h3>
+      <div id="batBowlChoice" style="display:none;">
+        <p>Choose to Bat or Bowl:</p>
+        <button onclick="choosePlay('Bat')">Bat</button>
+        <button onclick="choosePlay('Ball')">Ball</button>
+      </div>
+    </center>
+  </div>
+
+  <!-- Main Game Screen -->
+  <div id="gameScreen" style="display:none;">
+    <div class="heading" style="text-align:center; width:100%;">
+      <span class="digital">HAND CRICKET</span>
+      <span class="cricket"> LEAGUE</span>
+    </div>
+    <div class="main-flex">
+      <div class="side player-side">
+        <h2 style="color:yellow;">PLAYER</h2>
+  <div id="userHandArea" style="display:block; margin-top:20px;">
+          <img id="userHandImg" class="hand-img user-hand" src="" alt="player hand" height="150" width="150"><br>
+          <span id="userHandScore" style="font-size:1.5em; color:white;"></span>
+        </div>
+        <div id="numberPad" class="number-pad">
+          <button onclick="Score(0)">0</button>
+          <button onclick="Score(1)">1</button>
+          <button onclick="Score(2)">2</button>
+          <button onclick="Score(3)">3</button>
+          <button onclick="Score(4)">4</button>
+          <button onclick="Score(5)">5</button>
+          <button onclick="Score(6)">6</button>
+        </div>
+        <h3 id="score" class="side-score">YOUR SCORE: 0</h3>
+      </div>
+      <div class="center-info">
+        <h2 id="userChoice">Player: </h2>
+        <h2 id="sysChoice">System: </h2>
+        <h2 id="status1"></h2>
+        <h2 id="status2"></h2>
+        <h2 id="status3"></h2>
+      </div>
+      <div class="side computer-side">
+        <h2 style="color:yellow;">COMPUTER</h2>
+  <div id="compHandArea" style="display:block; margin-top:20px;">
+          <img id="compHandImg" class="hand-img comp-hand" src="" alt="computer hand" height="150" width="150"><br>
+          <span id="compHandScore" style="font-size:1.5em; color:white;"></span>
+        </div>
+  <h3 id="sysScore" class="side-score">SYSTEM SCORE: 0</h3>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
