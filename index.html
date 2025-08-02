@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ultimate Hand League</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0"/>
+  <title>Ultimate Hand Cricket League</title>
   <link rel="stylesheet" href="style.css" />
+  <meta name="description" content="Play the Ultimate Hand Cricket League - A fun, interactive hand cricket game for mobile and desktop">
+  <meta name="theme-color" content="#0b6623">
 </head>
 <body>
   <!-- Welcome Screen -->
@@ -17,13 +19,13 @@
       </h1>
       <h2>Welcome to Hand Cricket!</h2>
       <p>Choose your toss call:</p>
-      <button onclick="toss('Heads')">Heads</button>
-      <button onclick="toss('Tails')">Tails</button>
+      <button onclick="toss('Heads')" aria-label="Choose Heads for toss">Heads</button>
+      <button onclick="toss('Tails')" aria-label="Choose Tails for toss">Tails</button>
       <h3 id="tossResult"></h3>
       <div id="batBowlChoice" style="display:none;">
         <p>Choose to Bat or Bowl:</p>
-        <button onclick="choosePlay('Bat')">Bat</button>
-        <button onclick="choosePlay('Ball')">Ball</button>
+        <button onclick="choosePlay('Bat')" aria-label="Choose to Bat first">Bat</button>
+        <button onclick="choosePlay('Ball')" aria-label="Choose to Bowl first">Ball</button>
       </div>
     </center>
   </div>
@@ -42,13 +44,13 @@
           <span id="userHandScore" style="font-size:1.5em; color:white;"></span>
         </div>
         <div id="numberPad" class="number-pad">
-          <button onclick="Score(0)">0</button>
-          <button onclick="Score(1)">1</button>
-          <button onclick="Score(2)">2</button>
-          <button onclick="Score(3)">3</button>
-          <button onclick="Score(4)">4</button>
-          <button onclick="Score(5)">5</button>
-          <button onclick="Score(6)">6</button>
+          <button onclick="Score(0)" aria-label="Play 0">0</button>
+          <button onclick="Score(1)" aria-label="Play 1">1</button>
+          <button onclick="Score(2)" aria-label="Play 2">2</button>
+          <button onclick="Score(3)" aria-label="Play 3">3</button>
+          <button onclick="Score(4)" aria-label="Play 4">4</button>
+          <button onclick="Score(5)" aria-label="Play 5">5</button>
+          <button onclick="Score(6)" aria-label="Play 6">6</button>
         </div>
         <h3 id="score" class="side-score">YOUR SCORE: 0</h3>
       </div>

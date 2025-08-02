@@ -10,6 +10,34 @@ const s1 = document.getElementById("status1");
 const s2 = document.getElementById("status2");
 const s3 = document.getElementById("status3");
 
+// Prevent zoom on double tap for better mobile experience
+document.addEventListener('gesturestart', function (e) {
+    e.preventDefault();
+});
+
+// Prevent context menu on long press for better mobile UX
+document.addEventListener('contextmenu', function (e) {
+    e.preventDefault();
+});
+
+// Add touch feedback for better mobile interaction
+function addTouchFeedback(element) {
+    element.addEventListener('touchstart', function() {
+        this.style.transform = 'scale(0.95)';
+    });
+    
+    element.addEventListener('touchend', function() {
+        this.style.transform = '';
+    });
+}
+
+// Initialize mobile enhancements when DOM loads
+document.addEventListener('DOMContentLoaded', function() {
+    // Add touch feedback to all buttons
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach(addTouchFeedback);
+});
+
 // Toss handling
 function toss(userCall) {
     const result = Math.random() < 0.5 ? "Heads" : "Tails";

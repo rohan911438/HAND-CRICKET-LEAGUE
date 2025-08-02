@@ -1,111 +1,215 @@
 @media (max-width: 600px) {
+    body {
+        overflow: auto;
+        background-attachment: scroll;
+    }
+    
     .main-flex {
         flex-direction: column;
         align-items: stretch;
         min-height: unset;
         width: 100vw;
         height: auto;
+        padding: 5px;
+        box-sizing: border-box;
     }
+    
     .side, .center-info {
-        width: 98vw;
+        width: 95vw;
         min-width: unset;
-        margin: 8px auto;
-        border-radius: 14px;
-        padding: 10px 2vw 16px 2vw;
+        margin: 5px auto;
+        border-radius: 15px;
+        padding: 15px 3vw 20px 3vw;
         min-height: unset;
         box-sizing: border-box;
     }
-    .side-score {
-        font-size: 1.1em;
-        max-width: 98vw;
-        padding: 8px 0;
-    }
-    .hand-img {
-        height: 80px !important;
-        width: 80px !important;
-        margin: 6px 0;
-    }
-    .number-pad {
-        flex-wrap: wrap;
-        gap: 4px;
-    }
-    .number-pad button {
-        min-width: 36px;
-        min-height: 36px;
-        max-width: 44px;
-        max-height: 44px;
-        font-size: 1em;
-        padding: 0;
-        margin: 0 2px;
-    }
-    .heading {
-        font-size: 1.2em;
-        margin: 8px 0 12px 0;
-    }
-    .center-info {
-        font-size: 0.9em;
-        margin-top: 10px;
-    }
-    #userChoice, #sysChoice, #status1, #status2, #status3 {
-        font-size: 1em;
-        margin: 8px 0;
-    }
-    #welcomeScreen h1, #welcomeScreen h2, #welcomeScreen h3 {
-        font-size: 1.2em;
-    }
-    #welcomeScreen button {
-        font-size: 1em;
-        padding: 8px 18px;
-        margin: 6px;
-    }
-}
-@media (max-width: 900px) {
-    .main-flex {
-        flex-direction: column;
-        align-items: stretch;
-        min-height: unset;
-        width: 100vw;
-        height: auto;
-    }
-    .side, .center-info {
-        width: 98vw;
-        min-width: unset;
-        margin: 10px auto;
-        border-radius: 18px;
-        padding: 18px 4vw 24px 4vw;
-        min-height: unset;
-        box-sizing: border-box;
-    }
+    
     .side-score {
         font-size: 1.3em;
-        max-width: 98vw;
-        padding: 10px 0;
-    }
-    .hand-img {
-        height: 120px !important;
-        width: 120px !important;
+        max-width: 95vw;
+        padding: 8px 0;
         margin: 10px 0;
     }
+    
+    .hand-img {
+        height: 100px !important;
+        width: 100px !important;
+        margin: 8px 0;
+        border-width: 4px;
+    }
+    
     .number-pad {
         flex-wrap: wrap;
-        gap: 6px;
+        gap: 8px;
+        margin: 15px 0;
+        justify-content: center;
     }
+    
     .number-pad button {
-        min-width: 44px;
-        min-height: 44px;
+        min-width: 50px;
+        min-height: 50px;
         max-width: 60px;
         max-height: 60px;
-        font-size: 1.2em;
+        font-size: 1.5em;
         padding: 0;
-        margin: 0 4px;
+        margin: 2px;
+        border-radius: 50%;
     }
+    
     .heading {
         font-size: 2em;
-        margin: 10px 0 18px 0;
+        margin: 10px 0 15px 0;
+        text-align: center;
     }
+    
     .center-info {
         font-size: 1em;
-        margin-top: 20px;
+        margin: 15px auto;
+        padding: 15px;
+        background: rgba(0,0,0,0.7);
+        border-radius: 15px;
+        order: 2;
+    }
+    
+    .player-side {
+        order: 1;
+    }
+    
+    .computer-side {
+        order: 3;
+    }
+    
+    #userChoice, #sysChoice, #status1, #status2, #status3 {
+        font-size: 1.1em;
+        margin: 10px 0;
+        text-align: center;
+    }
+    
+    #welcomeScreen {
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    
+    #welcomeScreen h1 {
+        font-size: 2em;
+        margin: 20px 0;
+    }
+    
+    #welcomeScreen h2 {
+        font-size: 1.5em;
+        margin: 15px 0;
+    }
+    
+    #welcomeScreen h3 {
+        font-size: 1.2em;
+        margin: 10px 0;
+    }
+    
+    #welcomeScreen button {
+        font-size: 1.1em;
+        padding: 12px 24px;
+        margin: 10px;
+        min-width: 120px;
+    }
+    
+    #welcomeScreen p {
+        font-size: 1.1em;
+        margin: 15px 0;
+    }
+    
+    #userHandScore, #compHandScore {
+        font-size: 1.3em;
+        margin: 5px 0;
+    }
+}
+@media (max-width: 900px) and (min-width: 601px) {
+    body {
+        overflow: auto;
+    }
+    
+    .main-flex {
+        flex-direction: column;
+        align-items: stretch;
+        min-height: unset;
+        width: 100vw;
+        height: auto;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+    
+    .side, .center-info {
+        width: 95vw;
+        min-width: unset;
+        margin: 10px auto;
+        border-radius: 20px;
+        padding: 20px 4vw 25px 4vw;
+        min-height: unset;
+        box-sizing: border-box;
+    }
+    
+    .side-score {
+        font-size: 1.5em;
+        max-width: 95vw;
+        padding: 12px 0;
+        margin: 15px 0;
+    }
+    
+    .hand-img {
+        height: 130px !important;
+        width: 130px !important;
+        margin: 12px 0;
+        border-width: 5px;
+    }
+    
+    .number-pad {
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 20px 0;
+        justify-content: center;
+    }
+    
+    .number-pad button {
+        min-width: 60px;
+        min-height: 60px;
+        max-width: 70px;
+        max-height: 70px;
+        font-size: 1.5em;
+        padding: 0;
+        margin: 0 5px;
+    }
+    
+    .heading {
+        font-size: 2.5em;
+        margin: 15px 0 20px 0;
+        text-align: center;
+    }
+    
+    .center-info {
+        font-size: 1.2em;
+        margin: 20px auto;
+        padding: 20px;
+        background: rgba(0,0,0,0.6);
+        border-radius: 20px;
+        order: 2;
+    }
+    
+    .player-side {
+        order: 1;
+    }
+    
+    .computer-side {
+        order: 3;
+    }
+    
+    #userChoice, #sysChoice, #status1, #status2, #status3 {
+        font-size: 1.2em;
+        margin: 12px 0;
+        text-align: center;
+    }
+    
+    #userHandScore, #compHandScore {
+        font-size: 1.6em;
+        margin: 8px 0;
     }
 }
 /* Number pad styling */
@@ -135,12 +239,63 @@
     font-family: "Anton", "Titillium Web", sans-serif;
     font-weight: bold;
     transition: 0.15s;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
 }
-.number-pad button:hover, .number-pad button:focus {
+.number-pad button:hover, .number-pad button:focus, .number-pad button:active {
     background: linear-gradient(135deg, #ffe066 60%, #fff700 100%);
     color: #0b6623;
     transform: scale(1.12);
     box-shadow: 0 6px 18px #ffe06699, 0 0 0 4px #fff70099;
+}
+
+/* Better mobile feedback for number pad */
+@media (hover: none) {
+    .number-pad button:active {
+        transform: scale(0.9);
+        transition: transform 0.1s;
+    }
+}
+
+/* Ultra-small screen optimization (very small phones) */
+@media (max-width: 350px) {
+    .heading {
+        font-size: 1.5em !important;
+    }
+    
+    .number-pad button {
+        min-width: 40px !important;
+        min-height: 40px !important;
+        max-width: 50px !important;
+        max-height: 50px !important;
+        font-size: 1.2em !important;
+        margin: 1px !important;
+    }
+    
+    .hand-img {
+        height: 80px !important;
+        width: 80px !important;
+    }
+    
+    .side {
+        padding: 10px 2vw 15px 2vw !important;
+        margin: 3px auto !important;
+    }
+    
+    #welcomeScreen button {
+        font-size: 0.9em !important;
+        padding: 10px 20px !important;
+        min-width: 100px !important;
+    }
+    
+    .side-score {
+        font-size: 1.1em !important;
+    }
+    
+    #userHandScore, #compHandScore {
+        font-size: 1.1em !important;
+    }
 }
 
 /* Ensure scores are always visible and prominent on both sides */
@@ -168,6 +323,13 @@ body {
     font-family: 'Titillium Web', 'Segoe UI', Arial, sans-serif;
     min-height: 100vh;
     background-blend-mode: lighten;
+    touch-action: manipulation; /* Improves touch responsiveness */
+    -webkit-tap-highlight-color: transparent; /* Removes highlight on tap */
+    -webkit-touch-callout: none; /* Disable callout on iOS */
+    -webkit-user-select: none; /* Disable text selection on iOS */
+    -moz-user-select: none; /* Disable text selection on Firefox */
+    -ms-user-select: none; /* Disable text selection on IE/Edge */
+    user-select: none; /* Disable text selection */
 }
 
 /* ------------------- Welcome Screen ------------------- */
@@ -358,12 +520,23 @@ button {
     letter-spacing: 1px;
     transition: 0.2s;
     outline: none;
+    touch-action: manipulation; /* Better touch response */
+    -webkit-tap-highlight-color: transparent;
+    user-select: none; /* Prevent text selection on buttons */
 }
-button:hover, button:focus {
+button:hover, button:focus, button:active {
     background: linear-gradient(90deg, #fff700 60%, #ffe066 100%);
     color: #0b6623;
     transform: scale(1.08);
     box-shadow: 0 8px 32px #ffe06699, 0 0 0 4px #fff70099;
+}
+
+/* Better touch feedback for mobile */
+@media (hover: none) {
+    button:active {
+        transform: scale(0.95);
+        transition: transform 0.1s;
+    }
 }
 
 /* ------------------- Center Info Section ------------------- */
