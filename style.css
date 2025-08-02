@@ -1,3 +1,64 @@
+@media (max-width: 600px) {
+    .main-flex {
+        flex-direction: column;
+        align-items: stretch;
+        min-height: unset;
+        width: 100vw;
+        height: auto;
+    }
+    .side, .center-info {
+        width: 98vw;
+        min-width: unset;
+        margin: 8px auto;
+        border-radius: 14px;
+        padding: 10px 2vw 16px 2vw;
+        min-height: unset;
+        box-sizing: border-box;
+    }
+    .side-score {
+        font-size: 1.1em;
+        max-width: 98vw;
+        padding: 8px 0;
+    }
+    .hand-img {
+        height: 80px !important;
+        width: 80px !important;
+        margin: 6px 0;
+    }
+    .number-pad {
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+    .number-pad button {
+        min-width: 36px;
+        min-height: 36px;
+        max-width: 44px;
+        max-height: 44px;
+        font-size: 1em;
+        padding: 0;
+        margin: 0 2px;
+    }
+    .heading {
+        font-size: 1.2em;
+        margin: 8px 0 12px 0;
+    }
+    .center-info {
+        font-size: 0.9em;
+        margin-top: 10px;
+    }
+    #userChoice, #sysChoice, #status1, #status2, #status3 {
+        font-size: 1em;
+        margin: 8px 0;
+    }
+    #welcomeScreen h1, #welcomeScreen h2, #welcomeScreen h3 {
+        font-size: 1.2em;
+    }
+    #welcomeScreen button {
+        font-size: 1em;
+        padding: 8px 18px;
+        margin: 6px;
+    }
+}
 @media (max-width: 900px) {
     .main-flex {
         flex-direction: column;
