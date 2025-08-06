@@ -1,13 +1,10 @@
 // Game state variables
 let playerScore = 0;
 let systemScore = 0;
-let userChoice = 0;
-let innings = 1; // 1: user batting, 2: system batting
+let innings = 1; // 1: user batting, 2: system batting (user bowling)
 
 // DOM element references
 const status1 = document.getElementById("status1");
-const status2 = document.getElementById("status2");
-const status3 = document.getElementById("status3");
 const numberPad = document.getElementById('numberPad');
 const welcomeScreen = document.getElementById('welcomeScreen');
 const gameScreen = document.getElementById('gameScreen');
@@ -24,27 +21,35 @@ const sysChoiceEl = document.getElementById("sysChoice");
 
 // --- Mobile Experience Enhancements ---
 
-// Prevent zoom on double tap
 document.addEventListener('gesturestart', (e) => e.preventDefault());
-
-// Prevent context menu on long press
 document.addEventListener('contextmenu', (e) => e.preventDefault());
-
-// Add touch feedback to buttons on load
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('button').forEach(button => {
-        button.addEventListener('touchstart', function() {
-            this.style.transform = 'scale(0.95)';
-        });
-        button.addEventListener('touchend', function() {
-            this.style.transform = '';
-        });
+        button.addEventListener('touchstart', function() { this.style.transform = 'scale(0.95)'; });
+        button.addEventListener('touchend', function() { this.style.transform = ''; });
     });
 });
 
 // --- Game Logic ---
 
-// 1. Toss
+/**
+ * Centralized function to update the main status message based on the current game state.
+ * @param {string|null} outcome - A special outcome to display temporarily (e.g., 'USER_OUT').
+ */
+function updateStatusMessage(outcome = null) {
+    if (outcome === 'USER_OUT') {
+        status1.innerText = "You are OUT! Your turn to bowl.";
+    } else if (innings === 1) {
+        status1.innerText = "You are Batting...";
+    } else if (innings === 2) {
+        status1.innerText = "You are Bowling...";
+    }
+}
+
+/**
+ * Handles the coin toss.
+ * @param {string} userCall - "Heads" or "Tails".
+ */
 function toss(userCall) {
     const result = Math.random() < 0.5 ? "Heads" : "Tails";
     tossResultEl.innerText = `Toss Result: ${result}`;
@@ -54,81 +59,81 @@ function toss(userCall) {
         batBowlChoiceEl.style.display = "block";
     } else {
         const compChoice = Math.random() < 0.5 ? "Bat" : "Ball";
-        tossResultEl.innerText += ` — System won the toss and chose to ${compChoice}.`;
-        
-        // If system chooses to Ball, user has to Bat, and vice-versa.
+        tossResultEl.innerText += ` — System won and chose to ${compChoice}.`;
         const userPlay = compChoice === "Ball" ? "Bat" : "Ball";
         setTimeout(() => startGame(userPlay), 2000);
     }
 }
 
-// 2. User chooses to Bat or Bowl
+/**
+ * Starts the game after the toss decision.
+ * @param {string} choice - "Bat" or "Ball".
+ */
 function choosePlay(choice) {
     startGame(choice);
 }
 
-// 3. Start the Game
+/**
+ * Initializes the game screen and state.
+ * @param {string} userPlay - The action the user will perform ("Bat" or "Ball").
+ */
 function startGame(userPlay) {
-    // Set innings based on user's choice
     innings = (userPlay === "Bat") ? 1 : 2;
-
     welcomeScreen.style.display = "none";
     gameScreen.style.display = "block";
     
-    status1.innerText = (innings === 1) ? "You are Batting..." : "You are Bowling...";
-    
-    // Initial UI setup
+    updateStatusMessage();
     updateScoresUI();
     resetHandsToShake();
 }
 
-// 4. A "delivery" is played
-function Score(val) {
+/**
+ * Processes a single "delivery" in the game.
+ * @param {number} userChoice - The number the user played (0-6).
+ */
+function Score(userChoice) {
     resetHandsToShake();
-    numberPad.style.pointerEvents = 'none'; // Disable buttons during play
+    numberPad.style.pointerEvents = 'none';
 
     setTimeout(() => {
-        userChoice = val;
-        const sysChoice = Math.floor(Math.random() * 7); // 0-6
-
+        const sysChoice = Math.floor(Math.random() * 7);
         updateHandImages(userChoice, sysChoice);
         userChoiceEl.innerText = "Player: " + userChoice;
         sysChoiceEl.innerText = "System: " + sysChoice;
 
         if (innings === 1) { // User is batting
             if (userChoice === sysChoice) {
-                // User is OUT
-                innings = 2;
-                status1.innerText = "You are OUT! Your turn to bowl.";
+                innings = 2; // Change innings
+                updateStatusMessage('USER_OUT');
                 setTimeout(() => {
-                    status1.innerText = "You are Bowling...";
-                    updateScoresUI();
+                    updateStatusMessage();
                     resetHandsToShake();
                 }, 2000);
             } else {
                 playerScore += userChoice;
-                status1.innerText = "You are Batting...";
+                updateStatusMessage();
             }
-        } else { // System is batting
+        } else { // User is bowling (System is batting)
             if (userChoice === sysChoice) {
-                // System is OUT
-                endGame();
+                endGame(); // System is out
             } else {
                 systemScore += sysChoice;
                 if (systemScore > playerScore) {
                     endGame(); // System wins by chasing score
                 } else {
-                    status1.innerText = "You are Bowling...";
+                    updateStatusMessage();
                 }
             }
         }
         
         updateScoresUI();
-        numberPad.style.pointerEvents = 'auto'; // Re-enable buttons
-    }, 500); // 0.5s for hand shake animation
+        numberPad.style.pointerEvents = 'auto';
+    }, 500);
 }
 
-// 5. End the Game
+/**
+ * Ends the game and displays the result.
+ */
 function endGame() {
     let msg = "";
     if (playerScore > systemScore) {
@@ -142,31 +147,24 @@ function endGame() {
     numberPad.style.display = 'none';
 }
 
-// 6. Reset Game
+/**
+ * Resets the game to its initial state.
+ */
 function resetGame() {
     playerScore = 0;
     systemScore = 0;
-    userChoice = 0;
     innings = 1;
 
-    // Reset UI elements
     playerScoreEl.innerText = 'YOUR SCORE: 0';
     systemScoreEl.innerText = 'SYSTEM SCORE: 0';
-    userHandScoreEl.innerText = 'Your Score: 0';
-    compHandScoreEl.innerText = 'System Score: 0';
     userChoiceEl.innerText = 'Player: ';
     sysChoiceEl.innerText = 'System: ';
     status1.innerText = '';
-    status2.innerText = '';
-    status3.innerText = '';
     
     numberPad.style.display = 'block';
-    
-    // Go back to welcome screen
     gameScreen.style.display = 'none';
     welcomeScreen.style.display = 'flex';
     
-    // Reset toss UI
     tossResultEl.innerText = '';
     batBowlChoiceEl.style.display = 'none';
 }
@@ -181,10 +179,8 @@ function updateScoresUI() {
 }
 
 function setHandImage(imgId, val, who) {
-    const imgMap = {
-        0: 'zero', 1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five', 6: 'thumb'
-    };
-    const imgName = `${imgMap[val] || 'thumb'}_${who}.jpg`;
+    const imgMap = { 0: 'zero', 1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five', 6: 'thumb' };
+    const imgName = `${imgMap[val]}_${who}.jpg`;
     const imgElem = document.getElementById(imgId);
     imgElem.src = 'hand_gestures/' + imgName;
     imgElem.alt = `${who} hand showing ${val}`;
@@ -193,7 +189,7 @@ function setHandImage(imgId, val, who) {
 function animateHandShake(imgId) {
     const img = document.getElementById(imgId);
     img.classList.remove('hand-shake');
-    void img.offsetWidth; // Trigger reflow to restart animation
+    void img.offsetWidth;
     img.classList.add('hand-shake');
 }
 
