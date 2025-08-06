@@ -2,6 +2,7 @@
 let playerScore = 0;
 let systemScore = 0;
 let innings = 1; // 1: user batting, 2: system batting (user bowling)
+let userBattingFirst = true; // Track who bats first
 
 // DOM element references
 const status1 = document.getElementById("status1");
@@ -34,15 +35,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /**
  * Centralized function to update the main status message based on the current game state.
- * @param {string|null} outcome - A special outcome to display temporarily (e.g., 'USER_OUT').
+ * @param {string|null} outcome - A special outcome to display temporarily (e.g., 'USER_OUT', 'SYSTEM_OUT').
  */
 function updateStatusMessage(outcome = null) {
     if (outcome === 'USER_OUT') {
-        status1.innerText = "You are OUT! Your turn to bowl.";
+        if (userBattingFirst) {
+            status1.innerText = "You are OUT! Now it's System's turn to bat.";
+        } else {
+            status1.innerText = "You are OUT! System wins!";
+        }
+    } else if (outcome === 'SYSTEM_OUT') {
+        if (userBattingFirst) {
+            status1.innerText = "System is OUT! You win!";
+        } else {
+            status1.innerText = "System is OUT! Now it's your turn to bat.";
+        }
     } else if (innings === 1) {
-        status1.innerText = "You are Batting...";
+        if (userBattingFirst) {
+            status1.innerText = "First Innings: You are Batting (System is Bowling)";
+        } else {
+            status1.innerText = `Second Innings: You are Batting (Target: ${systemScore + 1})`;
+        }
     } else if (innings === 2) {
-        status1.innerText = "You are Bowling...";
+        if (userBattingFirst) {
+            status1.innerText = `Second Innings: You are Bowling (Target: ${playerScore + 1})`;
+        } else {
+            status1.innerText = "First Innings: You are Bowling (System is Batting)";
+        }
     }
 }
 
@@ -78,7 +97,9 @@ function choosePlay(choice) {
  * @param {string} userPlay - The action the user will perform ("Bat" or "Ball").
  */
 function startGame(userPlay) {
-    innings = (userPlay === "Bat") ? 1 : 2;
+    userBattingFirst = (userPlay === "Bat");
+    innings = userBattingFirst ? 1 : 2;
+    
     welcomeScreen.style.display = "none";
     gameScreen.style.display = "block";
     
@@ -103,23 +124,44 @@ function Score(userChoice) {
 
         if (innings === 1) { // User is batting
             if (userChoice === sysChoice) {
-                innings = 2; // Change innings
-                updateStatusMessage('USER_OUT');
-                setTimeout(() => {
-                    updateStatusMessage();
-                    resetHandsToShake();
-                }, 2000);
+                if (userBattingFirst) {
+                    // User was batting first, now system bats
+                    innings = 2;
+                    updateStatusMessage('USER_OUT');
+                    setTimeout(() => {
+                        updateStatusMessage();
+                        resetHandsToShake();
+                    }, 2000);
+                } else {
+                    // User was bowling first, now chasing. User is out - game over
+                    endGame();
+                }
             } else {
                 playerScore += userChoice;
                 updateStatusMessage();
             }
         } else { // User is bowling (System is batting)
             if (userChoice === sysChoice) {
-                endGame(); // System is out
+                if (userBattingFirst) {
+                    // This shouldn't happen in normal flow
+                    updateStatusMessage('SYSTEM_OUT');
+                    setTimeout(() => {
+                        endGame();
+                    }, 2000);
+                } else {
+                    // System was batting first, now user bats
+                    innings = 1;
+                    updateStatusMessage('SYSTEM_OUT');
+                    setTimeout(() => {
+                        updateStatusMessage();
+                        resetHandsToShake();
+                    }, 2000);
+                }
             } else {
                 systemScore += sysChoice;
-                if (systemScore > playerScore) {
-                    endGame(); // System wins by chasing score
+                if (!userBattingFirst && systemScore > playerScore) {
+                    // System is chasing and wins
+                    endGame();
                 } else {
                     updateStatusMessage();
                 }
@@ -154,6 +196,7 @@ function resetGame() {
     playerScore = 0;
     systemScore = 0;
     innings = 1;
+    userBattingFirst = true;
 
     playerScoreEl.innerText = 'YOUR SCORE: 0';
     systemScoreEl.innerText = 'SYSTEM SCORE: 0';
