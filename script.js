@@ -99,9 +99,9 @@ function Score(val) {
             if (userChoice === sysChoice) {
                 // User is OUT
                 innings = 2;
-                status1.innerText = "You are OUT! System's turn to bat.";
+                status1.innerText = "You are OUT! Your turn to bowl.";
                 setTimeout(() => {
-                    status1.innerText = "System is Batting...";
+                    status1.innerText = "You are Bowling...";
                     updateScoresUI();
                     resetHandsToShake();
                 }, 2000);
@@ -118,7 +118,7 @@ function Score(val) {
                 if (systemScore > playerScore) {
                     endGame(); // System wins by chasing score
                 } else {
-                    status1.innerText = "System is Batting...";
+                    status1.innerText = "You are Bowling...";
                 }
             }
         }
