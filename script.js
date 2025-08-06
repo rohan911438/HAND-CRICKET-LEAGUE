@@ -75,7 +75,7 @@ function startGame(userPlay) {
     welcomeScreen.style.display = "none";
     gameScreen.style.display = "block";
     
-    status1.innerText = (innings === 1) ? "You are Batting..." : "System is Batting...";
+    status1.innerText = (innings === 1) ? "You are Batting..." : "You are Bowling...";
     
     // Initial UI setup
     updateScoresUI();
